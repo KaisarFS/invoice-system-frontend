@@ -7,6 +7,28 @@ import { Button } from '@nextui-org/button';
 import { parseDate } from '@internationalized/date';
 import { today } from '@internationalized/date';
 
+
+const resizeObserverErrorPatch = () => {
+  const observer = new ResizeObserver(() => {});
+  observer.observe(document.body);
+};
+
+resizeObserverErrorPatch();
+
+
+if (typeof window !== "undefined") {
+  const observerErr = window.onerror;
+
+  window.onerror = (message, source, lineno, colno, error) => {
+    if (message.includes('ResizeObserver')) {
+      return true;
+    }
+    if (observerErr) {
+      return observerErr(message, source, lineno, colno, error);
+    }
+  };
+}
+
 const InvoiceForm = () => {
   const [customerName, setCustomerName] = useState('');
   const [salespersonName, setSalespersonName] = useState('');
@@ -16,24 +38,25 @@ const InvoiceForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formattedDate = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
 
     try {
-      const response = await axios.post('http://localhost:3000/api/invoices', {
-        date,
-        customerName,
-        salespersonName,
-        notes,
-        paymentType: 'Cash',
-        products
-      });
+        const response = await axios.post('http://localhost:3000/api/invoices', {
+            date: formattedDate, 
+            customerName,
+            salespersonName,
+            notes,
+            paymentType: 'Cash',
+            products
+        });
 
-      console.log(response, '<==== response handleSubmit');
-      alert('Invoice created successfully');
+        // To cut time, I jus tuse alert here, I'm so sorry.
+        alert('Invoice created successfully');
     } catch (error) {
-      console.error(error);
-      alert('Error creating invoice');
+        console.error('Error creating invoice:',error);
+        alert('Error creating invoice');
     }
-  };
+};
 
   return (
     <>

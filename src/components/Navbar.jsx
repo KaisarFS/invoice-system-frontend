@@ -28,6 +28,10 @@ export default function App() {
       label: 'Create invoice',
       link: '/add-invoice',
     },
+    {
+      label: 'Products (coming soon)',
+      link: '/products',
+    },
   ];
 
   const handleMenuItemClick = () => {
@@ -61,8 +65,8 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" to="#">
-            Integrations
+          <Link color="foreground" to="/products">
+            Products (coming soon)
           </Link>
         </NavbarItem>
       </NavbarContent>

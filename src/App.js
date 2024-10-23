@@ -4,6 +4,7 @@ import InvoiceList from './pages/InvoiceListPage';
 import InvoiceForm from './components/InvoiceForm';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
+import RevenueChart from './components/RevenueChart';
 
 const resizeObserverErrorPatch = () => {
   const observer = new ResizeObserver(() => {});
@@ -34,7 +35,11 @@ function App() {
         <Routes>
           <Route path="/invoices" element={<InvoiceList />} />
           <Route path="/add-invoice" element={<InvoiceForm />} />
-          <Route path="/" element={<HomePage />} />
+          {/* <Route path="/" element={<HomePage />} /> */}
+          <Route path="/" element={<>
+            <HomePage />
+            <RevenueChart />
+          </>} />
         </Routes>
       </div>
     </Router>

@@ -105,7 +105,7 @@ const ProductAutocomplete = ({ products, setProducts }) => {
                 <div className="flex flex-col">
                   <span className="text-small">{item.name}</span>
                   <span className="text-tiny text-default-400">
-                    ${item.price}
+                    ${item.price} | Stock: {item.stock}
                   </span>
                 </div>
               </div>

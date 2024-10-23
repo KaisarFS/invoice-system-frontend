@@ -88,41 +88,6 @@ const InvoiceList = () => {
       {status === 'loading' && <p>Loading invoices...</p>}
       {status === 'failed' && <p>Error: {error}</p>}
 
-      {/* {status === 'succeeded' && (
-        <>
-          <ul>
-            {invoices.map((invoice) => (
-              <li key={invoice.id}>
-                <strong>{invoice.customerName}</strong> -
-                {invoice.salespersonName} - $
-                {invoice.Products.reduce(
-                  (sum, product) => sum + product.price,
-                  0
-                ).toFixed(2)}
-                <ul>
-                  {invoice.Products.map((product) => (
-                    <li key={product.id}>
-                      {product.name} - ${product.price}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-
-          <div>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                disabled={currentPage === index + 1}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        </>
-      )} */}
       {status === 'succeeded' && (
         <>
           <div className="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-2 gap-4 mt-5 sm:mt-10">
@@ -456,17 +421,7 @@ const InvoiceList = () => {
               </div>
             ))}
 
-            {/* <div>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                disabled={currentPage === index + 1}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div> */}
+         
           </div>
           <Pagination
             disableCursorAnimation
