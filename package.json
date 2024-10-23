@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@internationalized/date": "^3.5.6",
     "@nextui-org/autocomplete": "^2.1.7",
     "@nextui-org/avatar": "^2.0.33",
     "@nextui-org/button": "^2.0.38",

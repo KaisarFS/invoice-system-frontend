@@ -5,29 +5,35 @@ import InvoiceForm from './components/InvoiceForm';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 
+const resizeObserverErrorPatch = () => {
+  const observer = new ResizeObserver(() => {});
+  observer.observe(document.body);
+};
+
+resizeObserverErrorPatch();
+
+
+if (typeof window !== "undefined") {
+  const observerErr = window.onerror;
+
+  window.onerror = (message, source, lineno, colno, error) => {
+    if (message.includes('ResizeObserver')) {
+      return true;
+    }
+    if (observerErr) {
+      return observerErr(message, source, lineno, colno, error);
+    }
+  };
+}
 function App() {
+
   return (
     <Router>
       <div>
-        {/* <h1>Invoice System</h1> */}
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/add-invoice">Add Invoice</Link>
-            </li>
-            <li>
-              <Link to="/invoices">View Invoices</Link>
-            </li>
-          </ul>
-        </nav> */}
         <Navbar />
         <Routes>
           <Route path="/invoices" element={<InvoiceList />} />
           <Route path="/add-invoice" element={<InvoiceForm />} />
-          {/* <Route path="/" element={<>
-            <h2>Welcome to the Invoice System</h2>
-            <p>Select a page from the navigation</p>
-          </>} /> */}
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
